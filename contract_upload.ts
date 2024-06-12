@@ -6,6 +6,9 @@ import { HdPath } from "@cosmjs/crypto";
 import path from "path";
 import { calculateFee, StdFee} from "@cosmjs/stargate"
 
+
+const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
+
 interface Options {
   readonly httpUrl: string
   readonly networkId: string
@@ -43,11 +46,12 @@ interface Network {
   recoverMnemonic: (password: string, filename?: string) => Promise<string>
 }
 
+
 const initOptions = (options: Options): Network => {
 
   const loadOrCreateWallet = async (options: Options, filename: string, password: string): Promise<DirectSecp256k1HdWallet> => {
 	const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
-		"average legal choose solve apology flat above clutch east forest total control"
+		MNEMONIC
 	  , {hdPaths: [options.hdPath], prefix: options.bech32prefix,});
 
 	const encrypted = await wallet.serialize(password);
@@ -133,6 +137,8 @@ const useInstantiate = async (
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
+
+
 	// need gas for this instantiation
 	const instantiateResponse = await client.instantiate(
 		addr, 
@@ -144,4 +150,29 @@ const useInstantiate = async (
 
 	return instantiateResponse
 }
+
+const useMutation = async () => {
+
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+	const res = await client.execute(
+		addr,
+		"mantra1m7wqgq02e95anl7jk2qruvtdl7afyff0d6pddr0zhqmgsvle70ls7aa2ws",
+		{
+			send_from:{
+				owner:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+				contract: "mantra1m7wqgq02e95anl7jk2qruvtdl7afyff0d6pddr0zhqmgsvle70ls7aa2ws",
+				amount:"2000",
+				msg:""
+			}
+		},
+		"auto",
+		"",
+	)
+	return res
+}
+
+
+
+
+
 
