@@ -133,6 +133,23 @@ const useInstantiate = async (
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
+	// Config for CW20 contract 
+	// const INIT = {
+	// 	name:"GOLD BOND RWA TOKEN",
+	// 	symbol:"GB-RWA",
+	// 	decimals:6,
+	// 	initial_balances:[
+	// 		{
+	// 			address:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",amount:"999999999999"
+	// 		}
+	// 	],
+	// 	mint:{
+	// 		minter:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+	// 		cap: "999999999999"
+	// 	},
+	// 	marketing:{}
+	// }
+
 	// need gas for this instantiation
 	const instantiateResponse = await client.instantiate(
 		addr, 
