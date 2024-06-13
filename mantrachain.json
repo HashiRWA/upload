@@ -1,0 +1,27 @@
+{
+  "CHAIN_ID": "mantra-hongbai-1",
+  "TESTNET_NAME": "mantra-hongbai",
+  "FEE_DENOM": "uom",
+  "STAKE_DENOM": "uom",
+  "BECH32_HRP": "wasm",
+  "WASMD_VERSION": "v0.27.0",
+  "CONFIG_DIR": ".mantrachaind",
+  "BINARY": "mantrachaind",
+  "COSMJS_VERSION": "v0.28.1",
+  "GENESIS_URL": "https://<location-to-be-provided>/config/genesis.json",
+  "RPC": "https://rpc.hongbai.mantrachain.io:443",
+  "FAUCET": "https://faucet.hongbai.mantrachain.io",
+  "NODE": ["--node", "https://rpc.hongbai.mantrachain.io:443"],
+  "TXFLAG": [
+    "--node",
+    "https://rpc.hongbai.mantrachain.io:443",
+    "--chain-id",
+    "mantra-hongbai-1",
+    "--gas-prices",
+    "0.25uom",
+    "--gas",
+    "auto",
+    "--gas-adjustment",
+    "1.3"
+  ]
+}

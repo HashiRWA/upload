@@ -139,11 +139,28 @@ const useInstantiate = async (
 
 
 
+	// Config for Bank contract
+	const INIT = {
+		config: {
+			name: "Test Pool",
+			symbol: "TP",
+			maturationdate: 1749773599,  
+			debtinterestrate: "17",
+			strikeprice: "2",
+			lendinterestrate: "10",
+			overcollateralizationfactor: "3",
+			asset: "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
+			collateral: "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2",
+			},
+		oracle: "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",  
+		admin: 'mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr'
+	}
+			
 	// need gas for this instantiation
 	const instantiateResponse = await client.instantiate(
 		addr, 
 		codeId, 
-		instantiateMsg, 
+		INIT, 
 		label, 
 		"auto"
 	)
