@@ -139,6 +139,13 @@
   resolved "https://registry.yarnpkg.com/@cosmjs/utils/-/utils-0.32.3.tgz#5dcaee6dd7cc846cdc073e9a7a7f63242f5f7e31"
   integrity sha512-WCZK4yksj2hBDz4w7xFZQTRZQ/RJhBX26uFHmmQFIcNUUVAihrLO+RerqJgk0dZqC42wstM9pEUQGtPmLcIYvg==
 
+"@keplr-wallet/types@^0.12.103":
+  version "0.12.103"
+  resolved "https://registry.yarnpkg.com/@keplr-wallet/types/-/types-0.12.103.tgz#ec2c55c42ed76868a634d47ce4d05ea96784a977"
+  integrity sha512-S0rcBLUBlOWNE6e8ri1IxCrlVk41ST+68Ge9gNHixwkjDrTURV+BIJjlp1EYL6Kf/D2JcqKMtxkZ9dJcxi8KGQ==
+  dependencies:
+    long "^4.0.0"
+
 "@noble/hashes@^1", "@noble/hashes@^1.0.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.4.0.tgz#45814aa329f30e4fe0ba49426f49dfccdd066426"

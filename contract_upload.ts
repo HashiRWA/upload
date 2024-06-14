@@ -190,6 +190,76 @@ const useMutation = async () => {
 
 
 
+const useFetchAllowance = async () => {
+	
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
+	const res = await client.queryContractSmart(
+		"mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
+		{
+			allowance:{
+				owner: "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+				spender: "mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t",
+			}
+		}
+	)
+	return res
+}
 
+const useGiveApproval = async () => {
+	
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
+	const res = await client.execute(
+		addr,
+		"mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
+		{
+			increase_allowance:{
+				spender: "mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t",
+				amount:"200000000",
+			}
+		},
+		"auto",
+		"",
+	)
+	return res
+}
+
+const useDeposit = async () =>{
+
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	const contractAddr = 'mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t'
+
+	const args = { 
+		transact:{
+			deposit:{
+				denom: 'mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj',
+				amount : "100000000",
+				string: "",
+			}
+		}
+	}
+
+	try{
+		const res = await client.execute(
+      addr,
+			contractAddr, 
+			args,
+			"auto",
+			"",
+		)
+		return {
+			data:{
+				res
+			},
+			error:undefined,
+			isPending:false
+		}
+
+	}
+	catch(error:unknown){
+		console.error(error)
+		return {error : error, isPending:false}
+	}
+}
