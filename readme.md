@@ -30,4 +30,8 @@ useInstantiate(151,{ "counter": 0 },"Deployed bank")
 <!-- mantra1p2ds40jhuf7d3h0n0heseue7msyqk0evzcks2pk4344wfe8rtx3sfx09fp -->
 <!-- Deposit Working -->
 <!-- mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t -->
+<!-- Withdraw Working -->
 <!-- mantra1pcpdl0kts7djtwwyyx5pn0xpg2t7husy3jmxxhc26tnlk7qc4rvqrgqj47 -->
+<!-- mantra16dlu5xshfdem7h3hw3y6m3qgrxavwxs4wrhac2uxcewzc76qwqaq6whynk -->
+<!-- Withdraw Interest Working -->
+<!--mantra16dlu5xshfdem7h3hw3y6m3qgrxavwxs4wrhac2uxcewzc76qwqaq6whynk -->

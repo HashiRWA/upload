@@ -8,7 +8,7 @@ import { calculateFee, StdFee} from "@cosmjs/stargate"
 
 
 const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
-const contractAddr = 'mantra1pcpdl0kts7djtwwyyx5pn0xpg2t7husy3jmxxhc26tnlk7qc4rvqrgqj47'
+const contractAddr = 'mantra16dlu5xshfdem7h3hw3y6m3qgrxavwxs4wrhac2uxcewzc76qwqaq6whynk'
 const asset_addr = "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj"
 const collateral_addr = "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2"
 const owner_addr = "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr"
@@ -277,6 +277,42 @@ const useWithdraw = async () =>{
 				denom: asset_addr,
 				amount : "50000000",
 			}
+		}
+	}
+
+	try{
+		const res = await client.execute(
+      addr,
+			contractAddr, 
+			args,
+			"auto",
+			"",
+		)
+		return {
+			data:{
+				res
+			},
+			error:undefined,
+			isPending:false
+		}
+
+	}
+	catch(error:unknown){
+		console.error(error)
+		return {error : error, isPending:false}
+	}
+}
+
+
+
+const useWithdrawInterest = async () =>{
+
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+
+	const args = { 
+		transact:{
+			withdrawInterest: {}
 		}
 	}
 
