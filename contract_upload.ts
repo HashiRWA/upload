@@ -8,6 +8,10 @@ import { calculateFee, StdFee} from "@cosmjs/stargate"
 
 
 const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
+const contractAddr = 'mantra1pcpdl0kts7djtwwyyx5pn0xpg2t7husy3jmxxhc26tnlk7qc4rvqrgqj47'
+const asset_addr = "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj"
+const collateral_addr = "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2"
+const owner_addr = "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr"
 
 interface Options {
   readonly httpUrl: string
@@ -149,11 +153,11 @@ const useInstantiate = async (
 			strikeprice: "2",
 			lendinterestrate: "10",
 			overcollateralizationfactor: "3",
-			asset: "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
-			collateral: "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2",
+			asset: asset_addr,
+			collateral: collateral_addr,
 			},
-		oracle: "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",  
-		admin: 'mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr'
+		oracle: owner_addr,  
+		admin: owner_addr,
 	}
 			
 	// need gas for this instantiation
@@ -176,7 +180,7 @@ const useMutation = async () => {
 		"mantra1m7wqgq02e95anl7jk2qruvtdl7afyff0d6pddr0zhqmgsvle70ls7aa2ws",
 		{
 			send_from:{
-				owner:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+				owner:owner_addr,
 				contract: "mantra1m7wqgq02e95anl7jk2qruvtdl7afyff0d6pddr0zhqmgsvle70ls7aa2ws",
 				amount:"2000",
 				msg:""
@@ -195,11 +199,11 @@ const useFetchAllowance = async () => {
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
 	const res = await client.queryContractSmart(
-		"mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
+		asset_addr,
 		{
 			allowance:{
-				owner: "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
-				spender: "mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t",
+				owner: owner_addr,
+				spender: contractAddr,
 			}
 		}
 	)
@@ -212,10 +216,10 @@ const useGiveApproval = async () => {
 
 	const res = await client.execute(
 		addr,
-		"mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj",
+		asset_addr,
 		{
 			increase_allowance:{
-				spender: "mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t",
+				spender: contractAddr,
 				amount:"200000000",
 			}
 		},
@@ -229,14 +233,49 @@ const useDeposit = async () =>{
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
-	const contractAddr = 'mantra190f353hxtswfdsux8c45wedh7wkngz2hrgphnrmfefhmh0yurmws35pd5t'
 
 	const args = { 
 		transact:{
 			deposit:{
-				denom: 'mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj',
+				denom: asset_addr,
 				amount : "100000000",
-				string: "",
+			}
+		}
+	}
+
+	try{
+		const res = await client.execute(
+      addr,
+			contractAddr, 
+			args,
+			"auto",
+			"",
+		)
+		return {
+			data:{
+				res
+			},
+			error:undefined,
+			isPending:false
+		}
+
+	}
+	catch(error:unknown){
+		console.error(error)
+		return {error : error, isPending:false}
+	}
+}
+
+const useWithdraw = async () =>{
+
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+
+	const args = { 
+		transact:{
+			withdraw:{
+				denom: asset_addr,
+				amount : "50000000",
 			}
 		}
 	}
