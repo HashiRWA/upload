@@ -8,7 +8,7 @@ import { calculateFee, StdFee} from "@cosmjs/stargate"
 
 
 const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
-const contractAddr = 'mantra19pnf44x3fjg2wzw6qz29eqd3jfz0wuxl7smuz50wd4thntytnq8qhmmc34'
+const contractAddr = 'mantra1zlx6dsre0pg8x7ry47f45ly6t50z87j6arx0ntnu3hdx25q46k9qwhgced'
 const asset_addr = "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj"
 const collateral_addr = "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2"
 const owner_addr = "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr"
@@ -571,14 +571,13 @@ const useRepay = async () =>{
 	}
 }
 
-
-const useFetchRepayablePositions = async () => {
+const useFetchWithdrawableAndRepayablePositions = async () => {
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
 	const res = await client.queryContractSmart(
 		contractAddr,
 		{
-			getRepayablePositions:{
+			getWithdrawableAndRepayablePositions:{
 				user: owner_addr,
 			}
 		}
@@ -586,13 +585,13 @@ const useFetchRepayablePositions = async () => {
 	return res
 }
 
-const useFetchWithdrawablePositions = async () => {
+const useGetPoolInfo = async () => {
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
 	const res = await client.queryContractSmart(
 		contractAddr,
 		{
-			getWithdrawablePositions:{
+			allDetails:{
 				user: owner_addr,
 			}
 		}
