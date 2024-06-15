@@ -8,7 +8,7 @@ import { calculateFee, StdFee} from "@cosmjs/stargate"
 
 
 const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
-const contractAddr = 'mantra16dlu5xshfdem7h3hw3y6m3qgrxavwxs4wrhac2uxcewzc76qwqaq6whynk'
+const contractAddr = 'mantra16zcqaswsvp2zv29wll2jzx7j67vwlm9qvdlp372467l5h2ddaqnsrreum6'
 const asset_addr = "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj"
 const collateral_addr = "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2"
 const owner_addr = "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr"
@@ -194,7 +194,7 @@ const useMutation = async () => {
 
 
 
-const useFetchAllowance = async () => {
+const useFetchAllowanceAsset = async () => {
 	
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
@@ -210,7 +210,7 @@ const useFetchAllowance = async () => {
 	return res
 }
 
-const useGiveApproval = async () => {
+const useGiveApprovalAsset = async () => {
 	
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
@@ -313,6 +313,113 @@ const useWithdrawInterest = async () =>{
 	const args = { 
 		transact:{
 			withdrawInterest: {}
+		}
+	}
+
+	try{
+		const res = await client.execute(
+      addr,
+			contractAddr, 
+			args,
+			"auto",
+			"",
+		)
+		return {
+			data:{
+				res
+			},
+			error:undefined,
+			isPending:false
+		}
+
+	}
+	catch(error:unknown){
+		console.error(error)
+		return {error : error, isPending:false}
+	}
+}
+
+
+
+
+
+// Borrow - Loan
+
+const useFetchAllowanceCollateral = async () => {
+	
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	const res = await client.queryContractSmart(
+		collateral_addr,
+		{
+			allowance:{
+				owner: owner_addr,
+				spender: contractAddr,
+			}
+		}
+	)
+	return res
+}
+
+const useGiveApprovalCollateral= async () => {
+	
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	const res = await client.execute(
+		addr,
+		collateral_addr,
+		{
+			increase_allowance:{
+				spender: contractAddr,
+				amount:"200000000",
+			}
+		},
+		"auto",
+		"",
+	)
+	return res
+}
+
+
+
+const useQuoteLoan = async () => {
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	const args = { 
+			getLoanQuote:{
+				amount: "5000000",
+			}
+	}
+
+	try{
+		const res : any = await client.queryContractSmart(
+			contractAddr, 
+			args
+		)
+
+		return {
+			data: JSON.stringify(res),
+			error:undefined,
+			isPending:false
+		}
+
+	}
+	catch(error:unknown){
+		console.error(error)
+		return {error : error, isPending:false}
+	}
+}
+
+const useLoan= async () =>{
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	const args = { 
+		transact:{
+			loan:{
+				asset_denom: asset_addr,
+				asset_amount : "5000000",
+				collateral_denom: collateral_addr,
+			}
 		}
 	}
 
