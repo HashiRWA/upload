@@ -134,25 +134,22 @@ const useVerifyCodeID = async (
 
 
 const useInstantiate = async (
-	codeId:number,
-	instantiateMsg:any,
 	label:string
 ) => {
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
-
-
+	const codeID = 178;
 	// Config for Bank contract
 	const INIT = {
 		config: {
 			name: "Test Pool",
 			symbol: "TP",
-			maturationdate: 1749773599,  
-			debtinterestrate: "17",
+			maturationdate: 1720613677,  
+			debtinterestrate: "15",
 			strikeprice: "2",
-			lendinterestrate: "10",
-			overcollateralizationfactor: "3",
+			lendinterestrate: "6",
+			overcollateralizationfactor: "2",
 			asset: asset_addr,
 			collateral: collateral_addr,
 			},
@@ -163,7 +160,7 @@ const useInstantiate = async (
 	// need gas for this instantiation
 	const instantiateResponse = await client.instantiate(
 		addr, 
-		codeId, 
+		codeID, 
 		INIT, 
 		label, 
 		"auto"
