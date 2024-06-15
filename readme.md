@@ -42,3 +42,5 @@ useInstantiate(167,{ "counter": 0 },"Deployed bank")
 <!-- mantra19pnf44x3fjg2wzw6qz29eqd3jfz0wuxl7smuz50wd4thntytnq8qhmmc34 -->
 <!-- Final Stable -->
 <!-- mantra1zlx6dsre0pg8x7ry47f45ly6t50z87j6arx0ntnu3hdx25q46k9qwhgced -->
+<!-- Final with diffrent userDetails and poolDetails -->
+<!-- mantra1gcq4789r6ca4s9e8lq2f585s0qatge8p7ehlpcsjsgf3kgxushzsrq7394 -->
