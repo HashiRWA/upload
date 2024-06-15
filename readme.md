@@ -15,12 +15,12 @@ useUpload("Work/hackathons/upload/hashiRWA_contracts.wasm")
 
 # Verify Contract:
 
-useVerifyCodeID(154)
+useVerifyCodeID(166)
 
 # Instantiate Contract:
 
-useInstantiate(121,{ "counter": 0 },"Poke Counter")
-useInstantiate(154,{ "counter": 0 },"Deployed bank")
+useInstantiate(166,{ "counter": 0 },"Poke Counter")
+useInstantiate(166,{ "counter": 0 },"Deployed bank")
 
 # FOR CW 20
 
@@ -36,3 +36,7 @@ useInstantiate(154,{ "counter": 0 },"Deployed bank")
 <!--mantra16dlu5xshfdem7h3hw3y6m3qgrxavwxs4wrhac2uxcewzc76qwqaq6whynk -->
 <!-- Borrow / Loan Working  -->
 <!-- mantra16zcqaswsvp2zv29wll2jzx7j67vwlm9qvdlp372467l5h2ddaqnsrreum6 -->
+<!-- mantra1tcaj39ja6nteqfy0dr64en2tl66u8j673pdgqewmue4czf09uemsvdm5w6 -->
+<!-- mantra17wz3c00nv7kcnh09akea6qd53guyvprpmcvcghh8vzu0e2ssdr4st46q2u -->
+
+<!-- mantra19pnf44x3fjg2wzw6qz29eqd3jfz0wuxl7smuz50wd4thntytnq8qhmmc34 -->
