@@ -127,34 +127,33 @@ const useVerifyCodeID = async (
 
 const useInstantiate = async (
 	codeId:number,
-	instantiateMsg:any,
 	label:string
 ) => {
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
 	// Config for CW20 contract 
-	// const INIT = {
-	// 	name:"GOLD BOND RWA TOKEN",
-	// 	symbol:"GB-RWA",
-	// 	decimals:6,
-	// 	initial_balances:[
-	// 		{
-	// 			address:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",amount:"999999999999"
-	// 		}
-	// 	],
-	// 	mint:{
-	// 		minter:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
-	// 		cap: "999999999999"
-	// 	},
-	// 	marketing:{}
-	// }
+	const INIT = {
+		name:"GOLD BOND RWA TOKEN",
+		symbol:"GB-RWA",
+		decimals:6,
+		initial_balances:[
+			{
+				address:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",amount:"9999999"
+			}
+		],
+		mint:{
+			minter:"mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+			cap: "999999999999"
+		},
+		marketing:{}
+	}
 
 	// need gas for this instantiation
 	const instantiateResponse = await client.instantiate(
 		addr, 
 		codeId, 
-		instantiateMsg, 
+		INIT, 
 		label, 
 		"auto"
 	)
@@ -162,3 +161,30 @@ const useInstantiate = async (
 	return instantiateResponse
 }
 
+
+
+const useMint = async () => {
+  // Setup connection and get the client
+  const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+  // Define the mint message
+  const mintMsg = {
+    mint: {
+      recipient: "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr",
+      amount: "1000001"  
+    }
+  };
+
+  // Execute the mint function
+  const result = await client.execute(
+    addr, 
+    "mantra1v2cepavet0vwe3s8phg5sqvnhl9hrddsu4wv870httrdls0ky69qm6j5ng",  
+    mintMsg, 
+    "auto",  
+    ""
+  );
+
+  // Print the response
+  console.log("Mint response:", result);
+  return result;
+}
