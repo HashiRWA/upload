@@ -8,7 +8,7 @@ import { calculateFee, StdFee} from "@cosmjs/stargate"
 
 
 const MNEMONIC = "average legal choose solve apology flat above clutch east forest total control"
-const contractAddr = 'mantra1zlx6dsre0pg8x7ry47f45ly6t50z87j6arx0ntnu3hdx25q46k9qwhgced'
+const contractAddr = 'mantra15g85x8gnlm9k8cjj9vu6v97fps3g2lmjyg64p0usdxrnc082wwyqsu6q57'
 const asset_addr = "mantra1c0wehfltspqczqmgv86nn0asf5jstld0yvqzzjtsavsn7pgzakusqa77lj"
 const collateral_addr = "mantra15cxyuljght67pazn72kggeqa6ejj7f6gpeypa8yw6tzm95qr0cksq7css2"
 const owner_addr = "mantra1pu3he8jq58lzc6evkyd4dj4swg69wq07k5wprr"
@@ -139,12 +139,12 @@ const useInstantiate = async (
 
 	const [addr, client] = await initOptions(mantraOptions).setup("password");
 
-	const codeID = 178;
+	const codeID = 202;
 	// Config for Bank contract
 	const INIT = {
 		config: {
-			name: "Test Pool",
-			symbol: "TP",
+			name: "Final Test Pool",
+			symbol: "FTP",
 			maturationdate: 1720613677,  
 			debtinterestrate: "15",
 			strikeprice: "2",
@@ -152,6 +152,7 @@ const useInstantiate = async (
 			overcollateralizationfactor: "2",
 			asset: asset_addr,
 			collateral: collateral_addr,
+			lockInPeriod: "0"
 			},
 		oracle: owner_addr,  
 		admin: owner_addr,
