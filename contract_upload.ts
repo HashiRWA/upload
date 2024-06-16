@@ -188,3 +188,22 @@ const useMint = async () => {
   console.log("Mint response:", result);
   return result;
 }
+
+
+//  get token info
+
+const useGetTokenInfo = async (tokenAddress : string) => {
+	// Setup connection and get the client
+	const [addr, client] = await initOptions(mantraOptions).setup("password");
+
+	// Define the mint message
+	const tokenInfo = await client.queryContractSmart(
+		tokenAddress,
+		{token_info:{}}
+	);
+
+	// Print the response
+	console.log("Token Info:", tokenInfo);
+	return tokenInfo;
+}
+
